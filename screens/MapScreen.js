@@ -1,15 +1,15 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 
-export default class SettingsScreen extends React.Component {
+export default class MapScreen extends React.Component {
   static navigationOptions = {
-    title: 'Settings',
+    title: 'Map',
   };
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text>Some kind of settings...</Text>
+        <Text>Some kind of a map...</Text>
       </ScrollView>
     );
   }
