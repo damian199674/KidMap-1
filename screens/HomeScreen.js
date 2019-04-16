@@ -1,14 +1,12 @@
 import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, View,} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import ScanQRScreen from "./ScanQRScreen";
 import DisplayQRScreen from "./DisplayQRScreen";
+import global from '../global';
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
         header: null,
-    };
-    state = {
-        isLogged: true,
-        qrCode: 'http://facebook.github.io/react-native/',
     };
 
     render() {
@@ -20,18 +18,19 @@ export default class HomeScreen extends React.Component {
                             source={require('../assets/images/family.png')}
                             style={styles.welcomeImage}
                         />
-                        <Text style={styles.getStartedText}>Gorny napis</Text>
                     </View>
                     <Text style={styles.getStartedText}>Welcome to Kid Map!</Text>
                     {
-                        this.state.isLogged ? <DisplayQRScreen qrCode={this.state.qrCode}/> :
-                            <Text style={styles.getStartedText}>
-                                Create an account or log in.</Text>
+                        global.isLogged ? this.getComponentForLogged() :
+                            <Text style={styles.getStartedText}>Create an account or log in.</Text>
                     }
-                    <Text style={styles.getStartedText}>Dolny napis</Text>
                 </ScrollView>
             </View>
         );
+    }
+
+    getComponentForLogged() {
+        return global.isParent ? <ScanQRScreen/> : <DisplayQRScreen qrCode={global.qrCode}/>;
     }
 }
 

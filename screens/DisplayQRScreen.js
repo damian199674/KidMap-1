@@ -1,6 +1,7 @@
 import React from 'react';
-import {StyleSheet, View,} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import QRCode from 'react-native-qrcode';
+import global from '../global';
 
 export default class DisplayQRScreen extends React.Component {
 
@@ -8,8 +9,9 @@ export default class DisplayQRScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text>Your QR code is:</Text>
                 <QRCode
-                    value={this.props.qrCode}
+                    value={global.qrCode}
                     size={200}
                     bgColor='black'
                     fgColor='white'/>
