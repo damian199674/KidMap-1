@@ -13,7 +13,7 @@ export default class DisplayQRScreen extends React.Component {
                 <QRCode
                     value={global.qrCode}
                     size={200}
-                    bgColor='black'
+                    bgColor='purple'
                     fgColor='white'/>
             </View>
         );
