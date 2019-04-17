@@ -1,9 +1,10 @@
 # KidMap
 
-![KidMap Logo - parents and kid](https://raw.githubusercontent.com/akubala/KidMap/master/assets/images/family.png)
+![Logo](https://raw.githubusercontent.com/akubala/KidMap/master/assets/images/family.png)
 
 ## About
-Simple mobile app for localizing where is your kid! Built with [React Native](https://facebook.github.io/react-native/)
+Simple mobile app for localizing where is your kid!
+Built with [React Native](https://facebook.github.io/react-native/).
 
 
 ## Maintainers
@@ -14,4 +15,4 @@ Simple mobile app for localizing where is your kid! Built with [React Native](ht
 
 ## Info
 Icons made by [Freepik](https://www.freepik.com/)
-from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/")
+from [Flaticon](https://www.flaticon.com/) are licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/")
