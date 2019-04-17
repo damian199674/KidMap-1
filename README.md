@@ -1,6 +1,5 @@
 # KidMap
 
-![Logo](https://raw.githubusercontent.com/akubala/KidMap/master/assets/images/family.png)
 
 ## About
 Simple mobile app for localizing where is your kid!
