@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import { MapView, Location, Permissions } from 'expo';
 import mapStyle from '../assets/mapStyle.json';
+import global from '../global';
 
 export default class MapScreen extends React.Component {
     static navigationOptions = {
@@ -16,26 +17,21 @@ export default class MapScreen extends React.Component {
             longitudeDelta: 0.0422
         },
         locationResult: null,
-        location: {
-            coords: {
-                latitude: 50.062463,
-                longitude: 19.944783
-            }
-        },
-        kidLocation: {
-            coords: {
-                latitude: 50.8892567,
-                longitude: 21.6640704
-            }
-        }
     };
 
     componentWillMount() {
         this._getLocationAsync();
     }
 
-    _handleMapRegionChange = mapRegion => {
-        this.setState({ mapRegion });
+    ShowKid = () => {
+        this.setState({
+            mapRegion: {
+                latitude: global.kidLocation.latitude,
+                longitude: global.kidLocation.longitude,
+                latitudeDelta: 0.0422,
+                longitudeDelta: 0.0422
+            }
+        });
     };
 
     _getLocationAsync = async () => {
@@ -61,34 +57,33 @@ export default class MapScreen extends React.Component {
 
     render() {
         return (
-            <MapView
-                style={{ flex: 1 }}
-                region={this.state.mapRegion}
-                customMapStyle={mapStyle}
-                scrollEnabled={true}
-                zoomEnabled={true}
-                pitchEnabled={true}
-                rotateEnabled={true}
-                onRegionChange={this._handleMapRegionChange}
-            >
-                <MapView.Marker
-                    coordinate={this.state.location.coords}
-                    image={require('../assets/images/binoculars.png')}
-                />
-
-                <MapView.Marker
-                    coordinate={this.state.kidLocation.coords}
-                    image={require('../assets/images/baby.png')}
-                />
-            </MapView>
+            <View style={{ flex: 1 }}>
+                <MapView
+                    style={{ flex: 1 }}
+                    region={this.state.mapRegion}
+                    customMapStyle={mapStyle}
+                    showsUserLocation={true}
+                >
+                    <MapView.Marker
+                        coordinate={global.kidLocation}
+                        image={require('../assets/images/baby.png')}
+                    />
+                </MapView>
+                <View style={styles.button}>
+                    <Button 
+                        onPress={this.ShowKid}
+                        title="Pokaż dziecko"
+                    />
+                </View>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: 15,
-        backgroundColor: '#fff',
-    },
+    button: {
+        position: 'absolute',
+        top: '90%', 
+        alignSelf: 'flex-end'
+    }
 });
