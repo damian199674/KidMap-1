@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Button, Image } from 'react-native';
 import { MapView, Location, Permissions } from 'expo';
 import mapStyle from '../assets/mapStyle.json';
 import global from '../global';
@@ -64,11 +64,13 @@ export default class MapScreen extends React.Component {
                     customMapStyle={mapStyle}
                     showsUserLocation={true}
                 >
-                    <MapView.Marker
-                        coordinate={global.kidLocation}
-                        image={require('../assets/images/baby.png')}
-                    />
+                    <MapView.Marker coordinate={global.kidLocation}>
+                        <Image 
+                            source={require('../assets/images/baby.png')} 
+                            style={styles.markerImage} />    
+                    </MapView.Marker>
                 </MapView>
+                
                 <View style={styles.button}>
                     <Button 
                         onPress={this.ShowKid}
@@ -85,5 +87,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: '90%', 
         alignSelf: 'flex-end'
+    },
+    markerImage: {
+        height: 32, 
+        width: 32
     }
 });
