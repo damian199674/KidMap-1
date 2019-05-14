@@ -1,30 +1,65 @@
-import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import ScanQRScreen from "./ScanQRScreen";
 import DisplayQRScreen from "./DisplayQRScreen";
 import global from '../global';
+import React, { Component } from 'react';
+import { View, Text, Image} from 'react-native';
+import firebase from 'firebase';
+import { Button} from 'native-base';
+import LoginForm from '../components/LoginForm';
 
-export default class HomeScreen extends React.Component {
+
+export default class HomeScreen extends Component {
+    state = { logged: null };
+
+    //FIREBASE
+    componentWillMount(){
+        const Firebaseconfig = {
+            apiKey: "",
+            authDomain: "",
+            databaseURL: "",
+            projectId: "",
+            storageBucket: "",
+            };
+
+        firebase.initializeApp(Firebaseconfig);
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ logged: true })
+            } else {
+                this.setState({ logged: false })
+            }
+        });
+    }
+
     static navigationOptions = {
-        header: null,
+      title: 'Home',
     };
 
+    renderComponent() {
+        if (this.state.logged) {
+            return (
+                <Button style={{ padding: 5 }}
+                block
+                rounded
+                info
+                onPress={() => firebase.auth().signOut()}
+            >
+                    {
+                        this.getComponentForLogged()
+                    }
+                <Text> Sign out</Text>
+            </Button>
+            );
+        } else {
+            return (
+                <LoginForm />
+            );
+        }
+      }
     render() {
         return (
-            <View style={styles.container}>
-                <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                    <View style={styles.welcomeContainer}>
-                        <Image
-                            source={require('../assets/images/family.png')}
-                            style={styles.welcomeImage}
-                        />
-                    </View>
-                    <Text style={styles.getStartedText}>Welcome to Kid Map!</Text>
-                    {
-                        global.isLogged ? this.getComponentForLogged() :
-                            <Text style={styles.getStartedText}>Create an account or log in.</Text>
-                    }
-                </ScrollView>
+            <View>
+                {this.renderComponent()}
             </View>
         );
     }
@@ -33,31 +68,3 @@ export default class HomeScreen extends React.Component {
         return global.isParent ? <ScanQRScreen/> : <DisplayQRScreen qrCode={global.qrCode}/>;
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    contentContainer: {
-        paddingTop: 30,
-    },
-    welcomeContainer: {
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 20,
-    },
-    welcomeImage: {
-        width: 100,
-        height: 80,
-        resizeMode: 'contain',
-        marginTop: 3,
-        marginLeft: -10,
-    },
-    getStartedText: {
-        fontSize: 20,
-        color: 'rgba(96,100,109, 1)',
-        lineHeight: 24,
-        textAlign: 'center',
-    },
-});
