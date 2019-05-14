@@ -1,5 +1,3 @@
-import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import ScanQRScreen from "./ScanQRScreen";
 import DisplayQRScreen from "./DisplayQRScreen";
 import global from '../global';
