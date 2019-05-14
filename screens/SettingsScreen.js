@@ -1,6 +1,5 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
-import RegisterForm from '../components/RegisterForm';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -9,7 +8,9 @@ export default class SettingsScreen extends React.Component {
 
   render() {
     return (
-      <RegisterForm />
+      <ScrollView style={styles.container}>
+        <Text>Some kind of settings...</Text>
+      </ScrollView>
     );
   }
 }
