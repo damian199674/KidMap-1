@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Button, Image } from 'react-native';
-import { MapView, Location, Permissions } from 'expo';
+import {Button, Image, StyleSheet, View} from 'react-native';
+import {Location, MapView, Permissions} from 'expo';
 import mapStyle from '../assets/mapStyle.json';
 import global from '../global';
 
@@ -35,7 +35,7 @@ export default class MapScreen extends React.Component {
     };
 
     _getLocationAsync = async () => {
-        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        let {status} = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== 'granted') {
             this.setState({
                 locationResult: 'Permission to access location was denied.',
@@ -44,7 +44,7 @@ export default class MapScreen extends React.Component {
         }
 
         let location = await Location.getCurrentPositionAsync({});
-        this.setState({ locationResult: JSON.stringify(location), location, });
+        this.setState({locationResult: JSON.stringify(location), location,});
         this.setState({
             mapRegion: {
                 latitude: location.coords.latitude,
@@ -57,22 +57,22 @@ export default class MapScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{flex: 1}}>
                 <MapView
-                    style={{ flex: 1 }}
+                    style={{flex: 1}}
                     region={this.state.mapRegion}
                     customMapStyle={mapStyle}
                     showsUserLocation={true}
                 >
                     <MapView.Marker coordinate={global.kidLocation}>
-                        <Image 
-                            source={require('../assets/images/baby.png')} 
-                            style={styles.markerImage} />    
+                        <Image
+                            source={require('../assets/images/baby.png')}
+                            style={styles.markerImage}/>
                     </MapView.Marker>
                 </MapView>
-                
+
                 <View style={styles.button}>
-                    <Button 
+                    <Button
                         onPress={this.ShowKid}
                         title="Pokaż dziecko"
                     />
@@ -85,11 +85,11 @@ export default class MapScreen extends React.Component {
 const styles = StyleSheet.create({
     button: {
         position: 'absolute',
-        top: '90%', 
+        top: '90%',
         alignSelf: 'flex-end'
     },
     markerImage: {
-        height: 32, 
+        height: 32,
         width: 32
     }
 });

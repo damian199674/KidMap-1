@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-    Image,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import ScanQRScreen from "./ScanQRScreen";
+import DisplayQRScreen from "./DisplayQRScreen";
+import global from '../global';
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -23,12 +20,17 @@ export default class HomeScreen extends React.Component {
                         />
                     </View>
                     <Text style={styles.getStartedText}>Welcome to Kid Map!</Text>
-
-                    <Text style={styles.getStartedText}>
-                        Create an account or log in.</Text>
+                    {
+                        global.isLogged ? this.getComponentForLogged() :
+                            <Text style={styles.getStartedText}>Create an account or log in.</Text>
+                    }
                 </ScrollView>
             </View>
         );
+    }
+
+    getComponentForLogged() {
+        return global.isParent ? <ScanQRScreen/> : <DisplayQRScreen qrCode={global.qrCode}/>;
     }
 }
 
