@@ -1,3 +1,8 @@
+import React from 'react';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import ScanQRScreen from "./ScanQRScreen";
+import DisplayQRScreen from "./DisplayQRScreen";
+import global from '../global';
 import React, { Component } from 'react';
 import { View, Text, Image} from 'react-native';
 import firebase from 'firebase';
@@ -8,16 +13,16 @@ import LoginForm from '../components/LoginForm';
 export default class HomeScreen extends Component {
     state = { logged: null };
 
-    //FIREBASE 
+    //FIREBASE
     componentWillMount(){
         const Firebaseconfig = {
-            apiKey: "AIzaSyAm1Pczk--iGA5E9M9p1TfRtFicErawv7Y",
-            authDomain: "kid-map.firebaseapp.com",
-            databaseURL: "https://kid-map.firebaseio.com",
-            projectId: "kid-map",
-            storageBucket: "kid-map.appspot.com",
+            apiKey: "",
+            authDomain: "",
+            databaseURL: "",
+            projectId: "",
+            storageBucket: "",
             };
-        
+
         firebase.initializeApp(Firebaseconfig);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -27,7 +32,7 @@ export default class HomeScreen extends Component {
             }
         });
     }
-    
+
     static navigationOptions = {
       title: 'Home',
     };
@@ -41,6 +46,9 @@ export default class HomeScreen extends Component {
                 info
                 onPress={() => firebase.auth().signOut()}
             >
+                    {
+                        this.getComponentForLogged()
+                    }
                 <Text> Sign out</Text>
             </Button>
             );
@@ -56,5 +64,9 @@ export default class HomeScreen extends Component {
                 {this.renderComponent()}
             </View>
         );
+    }
+
+    getComponentForLogged() {
+        return global.isParent ? <ScanQRScreen/> : <DisplayQRScreen qrCode={global.qrCode}/>;
     }
 }
