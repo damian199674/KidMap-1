@@ -3,7 +3,7 @@ import { View, Text, Image} from 'react-native';
 import firebase from 'firebase';
 import { Button} from 'native-base';
 import LoginForm from '../components/LoginForm';
-import RegisterForm from '../components/RegisterForm';
+
 
 export default class HomeScreen extends Component {
     state = { logged: null };
@@ -11,12 +11,12 @@ export default class HomeScreen extends Component {
     //FIREBASE 
     componentWillMount(){
         const Firebaseconfig = {
-            apiKey: "",
-            authDomain: "",
-            databaseURL: "",
-            projectId: "",
-            storageBucket: "",
-        };
+            apiKey: "AIzaSyAm1Pczk--iGA5E9M9p1TfRtFicErawv7Y",
+            authDomain: "kid-map.firebaseapp.com",
+            databaseURL: "https://kid-map.firebaseio.com",
+            projectId: "kid-map",
+            storageBucket: "kid-map.appspot.com",
+            };
         
         firebase.initializeApp(Firebaseconfig);
         firebase.auth().onAuthStateChanged((user) => {

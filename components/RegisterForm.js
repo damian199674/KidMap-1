@@ -6,9 +6,10 @@ import {Input, Form, Item, Button, Label, Header } from 'native-base';
 export default class RegisterForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password1: '', password2:'', error: '' };
+    this.state = { email: '', password1: '', password2:'', error: ''};
   }
 
+  
     onButtonRegisterPress() {
       this.setState({ error: ''})
       const { email, password1, password2 } = this.state;
@@ -16,7 +17,7 @@ export default class RegisterForm extends Component {
         firebase.auth().createUserWithEmailAndPassword(email, password1)
               .catch((error) => {
                   alert(error.message)      
-              });
+              })
         } else{
             alert('invalid password')
         }
@@ -24,7 +25,7 @@ export default class RegisterForm extends Component {
     
     render() {
       return (
-          <View style={styles.container}>
+      <View style={styles.container}>
         <Form style={styles.form}>
           <Item inlineLabel>
             <Label>Email:</Label>

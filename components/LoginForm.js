@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image} from 'react-native';
 import firebase from 'firebase';
 import {Input, Form, Item, Button, Label} from 'native-base';
+//import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ export default class LoginForm extends Component {
     }
   
     render() {
+      //const{ navigate } = this.props.navigation;
       return (
           <View style={styles.container}>
             <View style={styles.welcomeContainer}>
@@ -66,19 +68,22 @@ export default class LoginForm extends Component {
           >
             <Text> Login</Text>
           </Button>
-          <Button style={{ padding: 5 }}
+          {/* <Button style={{ padding: 5 }}
           block
           rounded
           info
-          onPress={() => alert('Register')}
+          onPress={() => navigate('Register')}
           >
             <Text> Join free!</Text>
-          </Button>
+          </Button>  */}
         </Form>
         </View>
       );
     }
   }
+
+
+
   
   const styles = {
     container: {
