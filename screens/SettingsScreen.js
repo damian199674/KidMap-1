@@ -1,18 +1,19 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, View, StyleSheet, Text } from 'react-native';
+import RegisterForm from '../components/RegisterForm';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'Settings',
   };
 
-  render() {
+render() {
     return (
-      <ScrollView style={styles.container}>
-        <Text>Some kind of settings...</Text>
-      </ScrollView>
+        <View>
+            <RegisterForm />
+        </View>
     );
-  }
+}
 }
 
 const styles = StyleSheet.create({

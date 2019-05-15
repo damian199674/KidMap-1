@@ -14,11 +14,11 @@ export default class HomeScreen extends Component {
     //FIREBASE
     componentWillMount(){
         const Firebaseconfig = {
-            apiKey: "",
-            authDomain: "",
-            databaseURL: "",
-            projectId: "",
-            storageBucket: "",
+            apiKey: "AIzaSyAm1Pczk--iGA5E9M9p1TfRtFicErawv7Y",
+            authDomain: "kid-map.firebaseapp.com",
+            databaseURL: "https://kid-map.firebaseio.com",
+            projectId: "kid-map",
+            storageBucket: "kid-map.appspot.com",
             };
 
         firebase.initializeApp(Firebaseconfig);
@@ -38,17 +38,20 @@ export default class HomeScreen extends Component {
     renderComponent() {
         if (this.state.logged) {
             return (
-                <Button style={{ padding: 5 }}
-                block
-                rounded
-                info
-                onPress={() => firebase.auth().signOut()}
-            >
-                    {
-                        this.getComponentForLogged()
-                    }
-                <Text> Sign out</Text>
-            </Button>
+                <View>
+                    <Button style={{ padding: 5 }}
+                    block
+                    rounded
+                    info
+                    onPress={() => firebase.auth().signOut()}
+                >
+                        
+                    <Text> Sign out</Text>
+                </Button>
+                {
+                    this.getComponentForLogged()
+                }
+            </View>
             );
         } else {
             return (

@@ -18,6 +18,7 @@ export default class RegisterForm extends Component {
               .catch((error) => {
                   alert(error.message)      
               })
+              alert('Your account has been created')
         } else{
             alert('invalid password')
         }
