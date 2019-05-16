@@ -11,9 +11,9 @@ export default class DisplayQRScreen extends React.Component {
             <View style={styles.container}>
                 <Text>Your QR code is:</Text>
                 <QRCode
-                    value={global.qrCode}
+                    value={this.props.qrCode}
                     size={200}
-                    bgColor='purple'
+                    bgColor='black'
                     fgColor='white'/>
             </View>
         );

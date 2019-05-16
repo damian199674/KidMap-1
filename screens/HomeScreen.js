@@ -2,29 +2,30 @@ import ScanQRScreen from "./ScanQRScreen";
 import DisplayQRScreen from "./DisplayQRScreen";
 import global from '../global';
 import React, { Component } from 'react';
-import { View, Text, Image} from 'react-native';
+import { View, Text, Image } from 'react-native';
 import firebase from 'firebase';
-import { Button} from 'native-base';
+import { Button } from 'native-base';
 import LoginForm from '../components/LoginForm';
 
 
 export default class HomeScreen extends Component {
-    state = { logged: null };
+    state = { logged: null, uid: "" };
 
     //FIREBASE
-    componentWillMount(){
+    componentWillMount() {
         const Firebaseconfig = {
             apiKey: "",
             authDomain: "",
             databaseURL: "",
             projectId: "",
             storageBucket: "",
-            };
+        };
 
         firebase.initializeApp(Firebaseconfig);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({ logged: true })
+                this.setState({ uid: user.uid})
             } else {
                 this.setState({ logged: false })
             }
@@ -32,7 +33,7 @@ export default class HomeScreen extends Component {
     }
 
     static navigationOptions = {
-      title: 'Home',
+        title: 'Home',
     };
 
     renderComponent() {
@@ -40,25 +41,25 @@ export default class HomeScreen extends Component {
             return (
                 <View>
                     <Button style={{ padding: 5 }}
-                    block
-                    rounded
-                    info
-                    onPress={() => firebase.auth().signOut()}
-                >
-                        
-                    <Text> Sign out</Text>
-                </Button>
-                {
-                    this.getComponentForLogged()
-                }
-            </View>
+                        block
+                        rounded
+                        info
+                        onPress={() => firebase.auth().signOut()}
+                    >
+
+                        <Text> Sign out</Text>
+                    </Button>
+                    {
+                        this.getComponentForLogged()
+                    }
+                </View>
             );
         } else {
             return (
                 <LoginForm />
             );
         }
-      }
+    }
     render() {
         return (
             <View>
@@ -68,6 +69,6 @@ export default class HomeScreen extends Component {
     }
 
     getComponentForLogged() {
-        return global.isParent ? <ScanQRScreen/> : <DisplayQRScreen qrCode={global.qrCode}/>;
+        return global.isParent ? <ScanQRScreen /> : <DisplayQRScreen qrCode={this.state.uid} />;
     }
 }
