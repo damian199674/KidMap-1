@@ -26,10 +26,12 @@ function getChildLocation(uid, then) {
     const dbRefObject = database.ref().child(uid);
     dbRefObject.on('value', snap => {
         childUid = snap.val().child
-        const childRefObject = database.ref().child(childUid);
-        childRefObject.on('value', snap => {
-            then.setState({ childLocation: snap.val().location })
-        })
+        if (childUid) {
+            const childRefObject = database.ref().child(childUid);
+            childRefObject.on('value', snap => {
+                then.setState({ childLocation: snap.val().location })
+            })
+        }
     });
 }
 
@@ -40,10 +42,23 @@ export function register(data) {
             .catch((error) => {
                 alert(error.message)
             })
-        alert('Your account has been created')
+            .then((authData) => {
+                createDatabaseRecord(authData.user.uid)
+                alert('Your account has been created')
+            })
     } else {
         alert('invalid password')
     }
+}
+
+function createDatabaseRecord(uid) {
+    database.ref().child(uid).set({
+        child: "",
+        location: {
+            latitude: 0,
+            longitude: 0,
+        }
+    });
 }
 
 export function login(data) {
@@ -52,4 +67,8 @@ export function login(data) {
         .catch((error) => {
             alert(error.message)
         });
+}
+
+export function sendLocation(uid, location){
+    database.ref().child(uid).child('location').set(location)
 }

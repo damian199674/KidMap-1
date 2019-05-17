@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Image, StyleSheet, View } from 'react-native';
 import { Location, MapView, Permissions } from 'expo';
 import mapStyle from '../assets/mapStyle.json';
-import { defaultState, observeStates } from '../firebase/firebase';
+import { defaultState, observeStates, sendLocation } from '../firebase/firebase';
 
 export default class MapScreen extends React.Component {
     static navigationOptions = {
@@ -45,6 +45,10 @@ export default class MapScreen extends React.Component {
                 latitudeDelta: 0.0422,
                 longitudeDelta: 0.0422
             }
+        });
+        sendLocation(this.state.uid, {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
         });
     };
 
