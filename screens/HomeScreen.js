@@ -3,33 +3,16 @@ import DisplayQRScreen from "./DisplayQRScreen";
 import global from '../global';
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
-import firebase from 'firebase';
+import { auth, defualtState, observeStates } from '../firebase/firebase';
 import { Button } from 'native-base';
 import LoginForm from '../components/LoginForm';
 
 
 export default class HomeScreen extends Component {
-    state = { logged: null, uid: "" };
+    state = defualtState;
 
-    //FIREBASE
     componentWillMount() {
-        const Firebaseconfig = {
-            apiKey: "",
-            authDomain: "",
-            databaseURL: "",
-            projectId: "",
-            storageBucket: "",
-        };
-
-        firebase.initializeApp(Firebaseconfig);
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({ logged: true })
-                this.setState({ uid: user.uid})
-            } else {
-                this.setState({ logged: false })
-            }
-        });
+        observeStates(this);
     }
 
     static navigationOptions = {
@@ -44,7 +27,7 @@ export default class HomeScreen extends Component {
                         block
                         rounded
                         info
-                        onPress={() => firebase.auth().signOut()}
+                        onPress={() => auth.signOut()}
                     >
 
                         <Text> Sign out</Text>

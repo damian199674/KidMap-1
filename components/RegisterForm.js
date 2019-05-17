@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image} from 'react-native';
-import firebase from 'firebase';
+import {register} from '../firebase/firebase';
 import {Input, Form, Item, Button, Label, Header } from 'native-base';
 
 export default class RegisterForm extends Component {
@@ -11,18 +11,8 @@ export default class RegisterForm extends Component {
 
   
     onButtonRegisterPress() {
-      this.setState({ error: ''})
-      const { email, password1, password2 } = this.state;
-      if (password1===password2){
-        firebase.auth().createUserWithEmailAndPassword(email, password1)
-              .catch((error) => {
-                  alert(error.message)      
-              })
-              alert('Your account has been created')
-        } else{
-            alert('invalid password')
-        }
-      }
+      register(this.state);
+    }
     
     render() {
       return (

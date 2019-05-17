@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image} from 'react-native';
-import firebase from 'firebase';
+import {login} from '../firebase/firebase';
 import {Input, Form, Item, Button, Label} from 'native-base';
-//import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -11,23 +10,10 @@ export default class LoginForm extends Component {
     }
 
     onButtonLoginPress() {
-      this.setState({ error: ''})
-      const { email, password } = this.state;
-      firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(this.login.bind(this))
-            .catch((error) => {
-                alert(error.message)      
-            });
-    }
-    
-    login() {
-      this.setState({
-        email: '', password: '', error: ''
-      })
+      login(this.state)
     }
   
     render() {
-      //const{ navigate } = this.props.navigation;
       return (
           <View style={styles.container}>
             <View style={styles.welcomeContainer}>
@@ -68,23 +54,12 @@ export default class LoginForm extends Component {
           >
             <Text> Login</Text>
           </Button>
-          {/* <Button style={{ padding: 5 }}
-          block
-          rounded
-          info
-          onPress={() => navigate('Register')}
-          >
-            <Text> Join free!</Text>
-          </Button>  */}
         </Form>
         </View>
       );
     }
   }
 
-
-
-  
   const styles = {
     container: {
       backgroundColor: '#fff',
