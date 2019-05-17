@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import FireBaseConfig from '../FirebaseConfig'
+import { FirebaseConfig } from '../FirebaseConfig'
 
-const config = FireBaseConfig;
-firebase.initializeApp(config);
+firebase.initializeApp(FirebaseConfig);
 
 export const database = firebase.database();
 export const auth = firebase.auth();
