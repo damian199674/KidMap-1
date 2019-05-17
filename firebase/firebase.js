@@ -6,16 +6,30 @@ firebase.initializeApp(FirebaseConfig);
 
 export const database = firebase.database();
 export const auth = firebase.auth();
-export const defualtState = {logged: false, uid: ""}
+export const defualtState = { logged: false, uid: "", childLocation: undefined }
 
 export function observeStates(then) {
     auth.onAuthStateChanged((user) => {
         if (user) {
             then.setState({ logged: true })
-            then.setState({ uid: user.uid})
+            then.setState({ uid: user.uid })
+            getChildLocation(user.uid, then);
+
         } else {
             then.setState({ logged: false })
+            then.setState({ childLocation: undefined })
         }
+    });
+}
+
+function getChildLocation(uid, then) {
+    const dbRefObject = database.ref().child(uid);
+    dbRefObject.on('value', snap => {
+        childUid = snap.val().child
+        const childRefObject = database.ref().child(childUid);
+        childRefObject.on('value', snap => {
+            then.setState({ childLocation: snap.val().location })
+        })
     });
 }
 
