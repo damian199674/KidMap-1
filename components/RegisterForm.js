@@ -8,6 +8,9 @@ export default class RegisterForm extends Component {
     super(props);
     this.state = { email: '', password1: '', password2:'', error: ''};
   }
+  static navigationOptions = {
+    header: null,
+  };
 
   
     onButtonRegisterPress() {

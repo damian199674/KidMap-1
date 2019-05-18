@@ -6,9 +6,12 @@ import { View, Text, Image } from 'react-native';
 import { auth, defualtState, observeStates } from '../firebase/firebase';
 import { Button } from 'native-base';
 import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
+import firebase from 'firebase';
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
     state = defualtState;
 
     componentWillMount() {
@@ -16,20 +19,20 @@ export default class HomeScreen extends Component {
     }
 
     static navigationOptions = {
-        title: 'Home',
+        header: null,
     };
 
     renderComponent() {
+        const{ navigate } = this.props.navigation;
         if (this.state.logged) {
             return (
                 <View>
                     <Button style={{ padding: 5 }}
-                        block
-                        rounded
-                        info
-                        onPress={() => auth.signOut()}
+                    block
+                    rounded
+                    info
+                    onPress={() => firebase.auth().signOut()}
                     >
-
                         <Text> Sign out</Text>
                     </Button>
                     {
@@ -39,10 +42,36 @@ export default class HomeScreen extends Component {
             );
         } else {
             return (
-                <LoginForm />
+                <View>
+                    <View style={styles.welcomeContainer}>
+                        <Image
+                        source={require('../assets/images/family.png')}
+                        style={styles.welcomeImage}
+                        />
+                </View>
+                <Text style={styles.getStartedText}>Welcome to Kid Map!</Text>
+                <Text style={styles.getStartedText}>
+                    Create an account or log in.</Text>
+                <Button style={{ padding: 10 }}
+                block
+                rounded
+                success
+                onPress={() => navigate('Login')}
+                >
+                    <Text> Login</Text>
+                </Button>
+                <Button style={{ padding: 5 }}
+                block
+                rounded
+                info
+                onPress={() => navigate('Register')}
+                >
+                    <Text> Register</Text>
+                </Button>
+            </View>
             );
         }
-    }
+      }
     render() {
         return (
             <View>
@@ -55,3 +84,39 @@ export default class HomeScreen extends Component {
         return global.isParent ? <ScanQRScreen /> : <DisplayQRScreen qrCode={this.state.uid} />;
     }
 }
+
+const MainNavigator = createStackNavigator({
+    Home: {screen: HomeScreen},
+    Login: {screen: LoginForm},
+    Register: {screen: RegisterForm}
+  });
+  const App = createAppContainer(MainNavigator);
+
+export default App;
+
+const styles = {
+    container: {
+      backgroundColor: '#fff',
+    },
+    welcomeContainer: {
+      alignItems: 'center',
+      marginTop: 10,
+      marginBottom: 20,
+    },
+    welcomeImage: {
+      width: 120,
+      height: 90,
+      resizeMode: 'contain',
+      margin: 'auto'
+    },
+    getStartedText: {
+      fontSize: 20, 
+      color: 'rgba(96,100,109, 1)',
+      lineHeight: 24,
+      textAlign: 'center',
+    },
+    form: {
+      marginTop: 10,
+    },
+  };
+

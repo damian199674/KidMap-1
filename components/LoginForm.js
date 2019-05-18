@@ -8,6 +8,9 @@ export default class LoginForm extends Component {
       super(props);
       this.state = { email: '', password: '', error: '' };
     }
+    static navigationOptions = {
+      header: null,
+    };
 
     onButtonLoginPress() {
       login(this.state)
@@ -16,16 +19,6 @@ export default class LoginForm extends Component {
     render() {
       return (
           <View style={styles.container}>
-            <View style={styles.welcomeContainer}>
-            <Image
-                source={require('../assets/images/family.png')}
-                style={styles.welcomeImage}
-            />
-            </View>
-          <Text style={styles.getStartedText}>Welcome to Kid Map!</Text>
-  
-          <Text style={styles.getStartedText}>
-            Create an account or log in.</Text>
       
         <Form style={styles.form}>
           <Item inlineLabel>
