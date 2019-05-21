@@ -33,6 +33,7 @@ function getChildLocation(uid, then) {
                 then.setState({childLocation: snap.val().location})
             })
         }
+        then.setState({isParent: snap.val().isParent});
     });
 }
 
@@ -73,4 +74,12 @@ export function login(data) {
 
 export function sendLocation(uid, location) {
     database.ref().child(uid).child('location').set(location)
+}
+
+export function addChildWithQr(uid, qrCode) {
+    const child = database.ref().child(qrCode)
+    child.on('value', snap => {
+            database.ref().child(uid).child('child').set(qrCode)
+        }
+    )
 }
