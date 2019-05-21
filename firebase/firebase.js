@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import firebase from 'firebase';
-import { FirebaseConfig } from '../FirebaseConfig'
+import {FirebaseConfig} from '../FirebaseConfig'
 
 firebase.initializeApp(FirebaseConfig);
 
@@ -13,6 +13,7 @@ export function observeStates(then) {
         if (user) {
             then.setState({ logged: true })
             then.setState({ uid: user.uid })
+            then.props.navigation.navigate('Home')
             getChildLocation(user.uid, then);
 
         } else {
