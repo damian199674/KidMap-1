@@ -6,19 +6,19 @@ firebase.initializeApp(FirebaseConfig);
 
 export const database = firebase.database();
 export const auth = firebase.auth();
-export const defualtState = { logged: false, uid: "", childLocation: undefined }
+export const defualtState = {logged: false, uid: "", childLocation: undefined, isParent: null}
 
 export function observeStates(then) {
     auth.onAuthStateChanged((user) => {
         if (user) {
-            then.setState({ logged: true })
-            then.setState({ uid: user.uid })
+            then.setState({logged: true})
+            then.setState({uid: user.uid})
             then.props.navigation.navigate('Home')
             getChildLocation(user.uid, then);
 
         } else {
-            then.setState({ logged: false })
-            then.setState({ childLocation: undefined })
+            then.setState({logged: false})
+            then.setState({childLocation: undefined})
         }
     });
 }
@@ -30,21 +30,21 @@ function getChildLocation(uid, then) {
         if (childUid) {
             const childRefObject = database.ref().child(childUid);
             childRefObject.on('value', snap => {
-                then.setState({ childLocation: snap.val().location })
+                then.setState({childLocation: snap.val().location})
             })
         }
     });
 }
 
 export function register(data) {
-    const { email, password1, password2 } = data;
+    const {email, password1, password2, isParent} = data;
     if (password1 === password2) {
         auth.createUserWithEmailAndPassword(email, password1)
             .catch((error) => {
                 alert(error.message)
             })
             .then((authData) => {
-                createDatabaseRecord(authData.user.uid)
+                createDatabaseRecord(authData.user.uid, isParent)
                 alert('Your account has been created')
             })
     } else {
@@ -52,24 +52,25 @@ export function register(data) {
     }
 }
 
-function createDatabaseRecord(uid) {
+function createDatabaseRecord(uid, isParent) {
     database.ref().child(uid).set({
         child: "",
         location: {
             latitude: 0,
             longitude: 0,
-        }
+        },
+        isParent: isParent
     });
 }
 
 export function login(data) {
-    const { email, password } = data;
+    const {email, password} = data;
     auth.signInWithEmailAndPassword(email, password)
         .catch((error) => {
             alert(error.message)
         });
 }
 
-export function sendLocation(uid, location){
+export function sendLocation(uid, location) {
     database.ref().child(uid).child('location').set(location)
 }
