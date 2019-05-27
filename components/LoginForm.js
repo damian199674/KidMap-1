@@ -18,36 +18,36 @@ export default class LoginForm extends Component {
   
     render() {
       return (
-          <View style={styles.container}>
-      
-        <Form style={styles.form}>
-          <Item inlineLabel>
-            <Label>Email:</Label>
-              <Input
-                  value={this.state.email}
-                  autoCapitalize="none"
-                  onChangeText={(email) => this.setState({ email })}
-              />
-          </Item>
-          <Item inlineLabel>
-              <Label>Password:</Label>
-                  <Input
-                      secureTextEntry={true}
-                      value={this.state.password}
-                      autoCapitalize="none"
-                      onChangeText={(password) => this.setState({ password })}
-  
-                  />
-          </Item>
-          <Button style={{ padding: 5 }}
-          block
-          rounded
-          success
-          onPress={this.onButtonLoginPress.bind(this)}
-          >
-            <Text> Login</Text>
-          </Button>
-        </Form>
+        <View style={styles.container}>
+          <Text style={styles.getStartedText}>Sign in</Text>
+          <Form style={styles.form}>
+            <Item fixedLabel >
+              <Label>Email:</Label>
+                <Input
+                    value={this.state.email}
+                    autoCapitalize="none"
+                    onChangeText={(email) => this.setState({ email })}
+                />
+            </Item>
+            <Item fixedLabel >
+                <Label>Password:</Label>
+                    <Input
+                        secureTextEntry={true}
+                        value={this.state.password}
+                        autoCapitalize="none"
+                        onChangeText={(password) => this.setState({ password })}
+    
+                    />
+            </Item>
+            <Button style={{ padding: 5 }}
+            block
+            rounded
+            success
+            onPress={this.onButtonLoginPress.bind(this)}
+            >
+              <Text> Login</Text>
+            </Button>
+          </Form>
         </View>
       );
     }
@@ -56,17 +56,6 @@ export default class LoginForm extends Component {
   const styles = {
     container: {
       backgroundColor: '#fff',
-    },
-    welcomeContainer: {
-      alignItems: 'center',
-      marginTop: 10,
-      marginBottom: 20,
-    },
-    welcomeImage: {
-      width: 80,
-      height: 60,
-      resizeMode: 'contain',
-      margin: 'auto'
     },
     getStartedText: {
       fontSize: 20, 

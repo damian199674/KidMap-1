@@ -20,8 +20,11 @@ export default class RegisterForm extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text style={styles.getStartedText}>Sign Up</Text>
+                <Text style={styles.getStartedText}>
+                    It’s free and always will be.</Text>
                 <Form style={styles.form}>
-                    <Item inlineLabel>
+                    <Item fixedLabel>
                         <Label>Email:</Label>
                         <Input
                             value={this.state.email}
@@ -29,7 +32,7 @@ export default class RegisterForm extends Component {
                             onChangeText={(email) => this.setState({email})}
                         />
                     </Item>
-                    <Item inlineLabel>
+                    <Item fixedLabel>
                         <Label>Password:</Label>
                         <Input
                             secureTextEntry={true}
@@ -39,8 +42,8 @@ export default class RegisterForm extends Component {
 
                         />
                     </Item>
-                    <Item inlineLabel>
-                        <Label>Password:</Label>
+                    <Item fixedLabel>
+                        <Label>Confirm password:</Label>
                         <Input
                             secureTextEntry={true}
                             value={this.state.password2}
@@ -72,17 +75,6 @@ export default class RegisterForm extends Component {
 const styles = {
     container: {
         backgroundColor: '#fff',
-    },
-    welcomeContainer: {
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 20,
-    },
-    welcomeImage: {
-        width: 80,
-        height: 60,
-        resizeMode: 'contain',
-        margin: 'auto'
     },
     getStartedText: {
         fontSize: 20,

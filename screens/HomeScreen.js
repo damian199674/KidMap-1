@@ -34,6 +34,7 @@ class HomeScreen extends Component {
                     >
                         <Text> Sign out</Text>
                     </Button>
+                    <View style={styles.space}></View>
                     {
                         this.getComponentForLogged()
                     }
@@ -51,6 +52,7 @@ class HomeScreen extends Component {
                     <Text style={styles.getStartedText}>Welcome to Kid Map!</Text>
                     <Text style={styles.getStartedText}>
                         Create an account or log in.</Text>
+                    <View style={styles.space}></View>
                     <Button style={{padding: 10}}
                             block
                             rounded
@@ -59,6 +61,7 @@ class HomeScreen extends Component {
                     >
                         <Text> Login</Text>
                     </Button>
+                    <View style={styles.space}></View>
                     <Button style={{padding: 5}}
                             block
                             rounded
@@ -97,6 +100,9 @@ export default App;
 const styles = {
     container: {
         backgroundColor: '#fff',
+    },
+    space: {
+        marginTop: 10,
     },
     welcomeContainer: {
         alignItems: 'center',
