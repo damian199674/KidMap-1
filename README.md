@@ -41,6 +41,12 @@ Both are free.
 ### Click [*here*](https://github.com/akubala/KidMap/raw/master/mockup/kidmap-prototype.vp) to download!
 
 ---
+## Use Case Diagram
+We can also illustrate all functionalities using this diagram:
+
+![Use Case Diagram](./mockup/use-case-diag.png)
+
+---
 # Download section
 
 Coming soon! Stay tuned... :)
