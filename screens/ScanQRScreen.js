@@ -1,15 +1,20 @@
 import React, {Component} from 'react';
-import {Alert, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {BarCodeScanner, Constants, Permissions} from 'expo';
-import global from '../global';
+import {addChildWithQr, defaultState, observeStates} from '../firebase/firebase';
+
 
 export default class App extends Component {
-    state = {
-        hasCameraPermission: null
-    };
+
+    state = Object.assign(
+        {
+            hasCameraPermission: null
+        },
+        defaultState)
 
     componentDidMount() {
         this._requestCameraPermission();
+        observeStates(this);
     }
 
     _requestCameraPermission = async () => {
@@ -20,16 +25,9 @@ export default class App extends Component {
     };
 
     _handleBarCodeRead = data => {
-        this.addChildWithQrCode(data.data);
+        addChildWithQr(this.state.uid, data.data);
     };
 
-    addChildWithQrCode(qr) {
-        let childId = this.getIdFromQr(qr);
-        if (!global.childrenIds.includes(childId)) {
-            global.childrenIds.push(childId);
-            Alert.alert("New target", "Oh, you add new target!");
-        }
-    }
 
     getIdFromQr(qr) {
         // FIXME: add implementation
