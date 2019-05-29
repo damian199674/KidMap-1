@@ -51,6 +51,13 @@ We can also illustrate all functionalities using this diagram:
 
 Coming soon! Stay tuned... :)
 
+## **App available!**
+
+![Download](./mockup/dwl.png)
+
+[DOWNLOAD](https://expo.io/artifacts/0c908a1a-b349-4b10-ae48-b834ab7e6d8c)
+
+
 ## Maintainers
 * [Damian](https://github.com/damian199674)
 * [Jakub](https://github.com/jaksak)
