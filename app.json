@@ -4,6 +4,9 @@
     "slug": "kidmap",
     "privacy": "public",
     "sdkVersion": "32.0.0",
+    "android": {
+        "package": "com.kidmap"
+     },
     "platforms": [
       "ios",
       "android"

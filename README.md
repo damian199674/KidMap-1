@@ -2,7 +2,7 @@
 
 
 ## Intro
-Simple mobile app for localizing where is your kid!
+Simple mobile app for localizing kids!
 Built with [React Native](https://facebook.github.io/react-native/).
 _Our app is still under construction._
 
@@ -54,7 +54,14 @@ We can also illustrate all functionalities using this diagram:
 
 ![Download](./mockup/dwl.png)
 
-[DOWNLOAD](https://expo.io/artifacts/0c908a1a-b349-4b10-ae48-b834ab7e6d8c)
+* [Android](https://expo.io/artifacts/0c908a1a-b349-4b10-ae48-b834ab7e6d8c) (_BETA 28/05/19_)
+
+* [Android](https://expo.io/artifacts/bb3cea82-3c52-44ac-86dd-002f41ad843a) (_BETA 29/05/19_)
+
+
+---
+
+* _iOS Coming soon!_
 
 ---
 
