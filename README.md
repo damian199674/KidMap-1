@@ -47,9 +47,8 @@ We can also illustrate all functionalities using this diagram:
 ![Use Case Diagram](./mockup/use-case-diag.png)
 
 ---
-# Download section
 
-Coming soon! Stay tuned... :)
+# Download section
 
 ## **App available!**
 
@@ -57,6 +56,7 @@ Coming soon! Stay tuned... :)
 
 [DOWNLOAD](https://expo.io/artifacts/0c908a1a-b349-4b10-ae48-b834ab7e6d8c)
 
+---
 
 ## Maintainers
 * [Damian](https://github.com/damian199674)
