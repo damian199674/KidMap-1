@@ -45,7 +45,7 @@ We can also illustrate all functionalities using this diagram:
 Our team struggled to create this amazing prototype to attract your attention!
 It is based on beautifull and simple creator [Just In Mind](https://www.justinmind.com/). Try our prototype!
 
-### [**DOWNLOAD PROTOTYPE**](https://github.com/akubala/KidMap/raw/master/mockup/kidmap-prototype.vp)
+### [Download Prototype](https://github.com/akubala/KidMap/raw/master/mockup/kidmap-prototype.vp)
 
 ### App design
 
@@ -63,7 +63,6 @@ Check our official [Expo build page](https://expo.io/@kidmapapp/kidmap/builds) f
 
 iOS version coming soon!
 
---
 
 ## Maintainers
 
